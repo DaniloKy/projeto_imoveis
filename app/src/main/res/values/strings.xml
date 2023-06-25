@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">projeto imoveis</string>
+    <string name="mainText">Main page</string>
+    <string name="RvImoveis">Lista de Imoveis</string>
+    <string name="RvClientes">Lista Clientes</string>
+    <string name="btnClientes">Create new Cliente</string>
+    <string name="btnImovel">Create new Imovel</string>
+    <string name="manageImoveis">manageImoveis</string>
+    <string name="createBtn">Create</string>
+    <string name="checkSauna">Inclui sauna?</string>
+    <string name="checkAreacomum">Inclui areacomum?</string>
+    <string name="labelTipologia">Tipologia</string>
+    <string name="labelDescricao">Descricao</string>
+    <string name="labelLocalizacao">Localizacao</string>
+    <string name="labelUrl">Upload Image</string>
+    <string name="deleteBtn">Delete</string>
+    <string name="editBtn">Edit</string>
+    <string name="labelNome">Nome</string>
+    <string name="labelIdade">Idade</string>
+</resources>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imagemImovel"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginRight="22dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" />
+
+    <RelativeLayout
+        android:id="@+id/imovelDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/marginDetails"
+        android:layout_toRightOf="@+id/imagemImovel">
+
+        <TextView
+            android:id="@+id/descricaoImovel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tipologiaImovel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="asd"
+            android:layout_below="@id/descricaoImovel"/>
+
+        <TextView
+            android:id="@+id/localizacaoImovel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_below="@id/tipologiaImovel"/>
+
+        <TextView
+            android:id="@+id/hasSauna"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/localizacaoImovel"/>
+
+        <TextView
+            android:id="@+id/hasAreacomum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/hasSauna"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>
