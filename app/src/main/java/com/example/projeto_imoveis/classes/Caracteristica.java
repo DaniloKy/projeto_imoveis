@@ -13,9 +13,7 @@ public class Caracteristica {
     }
 
     public boolean hasSauna(){ return (this.sauna == 1)?true:false; }
-    public boolean hasAreacomum(){
-        return (this.areacomum == 1)?true:false;
-    }
+    public boolean hasAreacomum(){ return (this.areacomum == 1)?true:false; }
 
     public int getId(){
         return this.id;

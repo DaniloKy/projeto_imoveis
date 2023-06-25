@@ -107,6 +107,8 @@ public class ImovelAdapter extends RecyclerView.Adapter<ImovelAdapter.ImovelView
             intent.putExtra("descricao", descricaoImovel.getText().toString());
             intent.putExtra("tipologia", tipologiaImovel.getText().toString());
             intent.putExtra("localizacao", localizacaoImovel.getText().toString());
+            Toast.makeText(context, this.caracteristica.toString(), Toast.LENGTH_SHORT).show();
+            intent.putExtra("idCaracteristica", this.caracteristica.getId());
             intent.putExtra("hasSauna", this.caracteristica.hasSauna());
             intent.putExtra("hasAreacomum", this.caracteristica.hasAreacomum());
             return intent;

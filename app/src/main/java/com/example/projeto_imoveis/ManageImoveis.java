@@ -21,7 +21,7 @@ import java.util.HashMap;
 public class ManageImoveis extends AppCompatActivity implements View.OnClickListener {
 
     DatabaseHelper db;
-    int id;
+    int id, idCaracteristica;
     boolean isUpdate = false;
     Button button;
     EditText edit_descricao, edit_tipologia, edit_localizacao, edit_url;
@@ -42,12 +42,13 @@ public class ManageImoveis extends AppCompatActivity implements View.OnClickList
         button.setOnClickListener(this);
 
         Intent intent = getIntent();
-        if(intent.hasExtra("id")) {
+        if(intent.hasExtra("id") && intent.hasExtra("idCaracteristica")) {
             isUpdate = true;
             id = intent.getIntExtra("id", -1);
             edit_descricao.setText(intent.getStringExtra("descricao"));
             edit_tipologia.setText(intent.getStringExtra("tipologia"));
             edit_localizacao.setText(intent.getStringExtra("localizacao"));
+            idCaracteristica =  intent.getIntExtra("idCaracteristica", -1);
             checkSauna.setChecked(intent.getBooleanExtra("hasSauna", false));
             checkAreacomum.setChecked(intent.getBooleanExtra("hasAreacomum", false));
             button.setText("Save");
@@ -84,6 +85,7 @@ public class ManageImoveis extends AppCompatActivity implements View.OnClickList
         int sauna = checkSauna.isChecked() ? 1 : 0;
         int areacomum = checkAreacomum.isChecked() ? 1 : 0;
         Caracteristica caracteristica = new Caracteristica(sauna, areacomum);
+        caracteristica.setId(this.idCaracteristica);
         Imovel imovel = new Imovel(descricao, tipologia, localizacao, url);
         imovel.setId(this.id);
         imovel.caracteristicas = caracteristica;
