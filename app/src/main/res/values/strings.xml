@@ -17,4 +17,9 @@
     <string name="editBtn">Edit</string>
     <string name="labelNome">Nome</string>
     <string name="labelIdade">Idade</string>
+    <string name="loginPage">Login</string>
+    <string name="labelUsername">Username</string>
+    <string name="labelPassword">Password</string>
+    <string name="loginBtn">Login</string>
+    <string name="createTest">Create test user</string>
 </resources>

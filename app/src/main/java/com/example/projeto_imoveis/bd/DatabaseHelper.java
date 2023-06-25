@@ -152,6 +152,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return client;
     }
 
+    public User criarUser(User user){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(KEY_USER, user.user);
+        values.put(KEY_PASSWORD, user.getPassword());
+        int user_id = (int) db.insert(TABLE_USERS, null, values);
+        user.setId(user_id);
+        return user;
+    }
+
     public Imovel obterImovel(long imovel_id){
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM "+TABLE_IMOVEIS+" WHERE "+KEY_ID+" = "+imovel_id;
@@ -172,7 +182,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Boolean attemptLogIn(String username, String password){
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM "+TABLE_USERS+" WHERE "+KEY_USER+" = "+username+" AND "+KEY_PASSWORD+" = "+password;
+        String query = "SELECT * FROM "+TABLE_USERS+" WHERE "+KEY_USER+" = '"+username+"' AND "+KEY_PASSWORD+" = '"+password+"'";
         Cursor c = db.rawQuery(query, null);
         boolean login = false;
         if(c != null && c.moveToFirst()) {
