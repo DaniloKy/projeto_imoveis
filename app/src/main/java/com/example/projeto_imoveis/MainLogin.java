@@ -53,9 +53,9 @@ public class MainLogin extends AppCompatActivity implements View.OnClickListener
             User user = new User("admin");
             user.setPassword("admin");
             db = new DatabaseHelper(getApplicationContext());
-            User u = db.criarUser(user);
+            if(!db.checkUser(user.user))
+                db.criarUser(user);
             db.fecharDB();
-            Log.i("USER TESTE", u.toString());
         }
     }
 }

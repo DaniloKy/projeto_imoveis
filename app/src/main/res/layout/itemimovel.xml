@@ -21,7 +21,7 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone" />
 
-            <ImageView
+            <com.android.volley.toolbox.NetworkImageView
                 android:id="@+id/imagemImovel"
                 android:layout_width="50dp"
                 android:layout_height="50dp"

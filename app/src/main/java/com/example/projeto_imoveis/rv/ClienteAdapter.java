@@ -10,10 +10,12 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.toolbox.NetworkImageView;
 import com.example.projeto_imoveis.ManageClientes;
 import com.example.projeto_imoveis.R;
 import com.example.projeto_imoveis.bd.DatabaseHelper;
 import com.example.projeto_imoveis.classes.Client;
+import com.example.projeto_imoveis.volley.VolleySingleton;
 
 import java.util.List;
 
@@ -37,7 +39,7 @@ public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ClientVi
         holder.idCliente = clientes.get(position).getId();
         holder.nomeCliente.setText(clientes.get(position).nome);
         holder.idadeCliente.setText((clientes.get(position).idade).toString());
-        //holder.imagemCliente.setImageResource(clientes.get(position).url);
+        holder.urlCliente.setImageUrl(clientes.get(position).url, VolleySingleton.getInstance(holder.context).getImageLoader());
     }
 
     @Override
@@ -50,7 +52,7 @@ public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ClientVi
         DatabaseHelper db;
         int idCliente;
         Button deleteBtn, editBtn;
-        //ImageView urlCliente;
+        NetworkImageView urlCliente;
         TextView nomeCliente, idadeCliente;
         Context context;
 
@@ -63,7 +65,7 @@ public class ClienteAdapter extends RecyclerView.Adapter<ClienteAdapter.ClientVi
             deleteBtn.setOnClickListener(this);
             editBtn.setOnClickListener(this);
 
-            //urlCliente = (ImageView) itemView.findViewById(R.id.imagemCliente);
+            urlCliente = (NetworkImageView) itemView.findViewById(R.id.imagemCliente);
             nomeCliente = (TextView) itemView.findViewById(R.id.nomeCliente);
             idadeCliente = (TextView) itemView.findViewById(R.id.idadeCliente);
             this.context = ctx;

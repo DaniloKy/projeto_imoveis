@@ -2,7 +2,6 @@ package com.example.projeto_imoveis.rv;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +11,14 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.toolbox.NetworkImageView;
 import com.example.projeto_imoveis.ManageImoveis;
 import com.example.projeto_imoveis.R;
 import com.example.projeto_imoveis.bd.DatabaseHelper;
 import com.example.projeto_imoveis.classes.Caracteristica;
 import com.example.projeto_imoveis.classes.Imovel;
+import com.example.projeto_imoveis.service.ServiceVolley;
+import com.example.projeto_imoveis.volley.VolleySingleton;
 
 import java.util.List;
 
@@ -46,7 +48,7 @@ public class ImovelAdapter extends RecyclerView.Adapter<ImovelAdapter.ImovelView
         holder.tipologiaImovel.setText(imoveis.get(position).tipologia);
         holder.localizacaoImovel.setText(imoveis.get(position).localizacao);
         holder.caracteristica = imoveis.get(position).caracteristicas;
-        //holder.imagemCliente.setImageResource(imoveis.get(position).url);
+        holder.urlImovel.setImageUrl(imoveis.get(position).url, VolleySingleton.getInstance(holder.context).getImageLoader());
     }
 
     @Override
@@ -59,7 +61,7 @@ public class ImovelAdapter extends RecyclerView.Adapter<ImovelAdapter.ImovelView
         DatabaseHelper db;
         Button deleteBtn, editBtn;
         int idImovel;
-        //ImageView urlImovel;
+        NetworkImageView urlImovel;
 
         Caracteristica caracteristica;
         TextView descricaoImovel, tipologiaImovel, localizacaoImovel;
@@ -73,9 +75,7 @@ public class ImovelAdapter extends RecyclerView.Adapter<ImovelAdapter.ImovelView
             editBtn = (Button) itemView.findViewById(R.id.editImovel);
             deleteBtn.setOnClickListener(this);
             editBtn.setOnClickListener(this);
-
-
-            //imagemImovel = (ImageView) itemView.findViewById(R.id.imagemImovel);
+            urlImovel = (NetworkImageView) itemView.findViewById(R.id.imagemImovel);
             descricaoImovel = (TextView) itemView.findViewById(R.id.descricaoImovel);
             tipologiaImovel = (TextView) itemView.findViewById(R.id.tipologiaImovel);
             localizacaoImovel = (TextView) itemView.findViewById(R.id.localizacaoImovel);
