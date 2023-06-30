@@ -22,6 +22,7 @@ public class ManageImoveis extends AppCompatActivity implements View.OnClickList
 
     DatabaseHelper db;
     int id, idCaracteristica;
+    String descricao;
     boolean isUpdate = false;
     Button button;
     EditText edit_descricao, edit_tipologia, edit_localizacao, edit_url;
@@ -45,6 +46,7 @@ public class ManageImoveis extends AppCompatActivity implements View.OnClickList
         if(intent.hasExtra("id") && intent.hasExtra("idCaracteristica")) {
             isUpdate = true;
             id = intent.getIntExtra("id", -1);
+            descricao = intent.getStringExtra("descricao");
             edit_descricao.setText(intent.getStringExtra("descricao"));
             edit_tipologia.setText(intent.getStringExtra("tipologia"));
             edit_localizacao.setText(intent.getStringExtra("localizacao"));
@@ -61,15 +63,21 @@ public class ManageImoveis extends AppCompatActivity implements View.OnClickList
         if(view == this.button){
             if(!isUpdate) {
                 Imovel imovel = getInputValues();
+                Log.e("IMOVE A CRIRAR", imovel.toString());
                 db = new DatabaseHelper(getApplicationContext());
-                db.criarImovel(imovel);
+                if(!db.checkImovel(imovel.descricao))
+                    db.criarImovel(imovel);
                 db.fecharDB();
                 finish();
             }else{
+                int status = -1;
                 Imovel imovel = getInputValues();
                 Log.i("IMOVEL:", imovel.toString());
                 db = new DatabaseHelper(getApplicationContext());
-                int status = db.atualizarImovel(imovel);
+                //if(descricao == imovel.descricao)
+                    //status = db.atualizarImovel(imovel);
+                //else if (!db.checkImovel(imovel.descricao))
+                    status = db.atualizarImovel(imovel);
                 db.fecharDB();
                 Log.i("ATUALIZACAO STATUS", "Status: "+String.valueOf(status));
                 finish();
@@ -82,8 +90,8 @@ public class ManageImoveis extends AppCompatActivity implements View.OnClickList
         String tipologia = edit_tipologia.getText().toString();
         String localizacao = edit_localizacao.getText().toString();
         String url = edit_url.getText().toString();
-        int sauna = checkSauna.isChecked() ? 1 : 0;
-        int areacomum = checkAreacomum.isChecked() ? 1 : 0;
+        String sauna = checkSauna.isChecked() ? "sim" : "nao";
+        String areacomum = checkAreacomum.isChecked() ? "sim" : "nao";
         Caracteristica caracteristica = new Caracteristica(sauna, areacomum);
         caracteristica.setId(this.idCaracteristica);
         Imovel imovel = new Imovel(descricao, tipologia, localizacao, url);

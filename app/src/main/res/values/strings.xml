@@ -22,4 +22,5 @@
     <string name="labelPassword">Password</string>
     <string name="loginBtn">Login</string>
     <string name="createTest">Create test user</string>
+    <string name="loadingTxt">Loading data...</string>
 </resources>

@@ -49,7 +49,8 @@ public class ManageClientes extends AppCompatActivity implements View.OnClickLis
             if(!isUpdate) {
                 Client client = getInputValues();
                 db = new DatabaseHelper(getApplicationContext());
-                db.criarClient(client);
+                if(!db.checkClient(client.nome))
+                    db.criarClient(client);
                 db.fecharDB();
                 finish();
             }else{

@@ -14,7 +14,6 @@ import com.example.projeto_imoveis.classes.Imovel;
 import com.example.projeto_imoveis.classes.User;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -117,8 +116,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Caracteristica criarCaracteristica(Caracteristica caracteristica){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KEY_SAUNA, caracteristica.sauna);
-        values.put(KEY_AREACOMUM, caracteristica.areacomum);
+        values.put(KEY_SAUNA, caracteristica.hasSauna()?1:0);
+        values.put(KEY_AREACOMUM, caracteristica.hasAreacomum()?1:0);
         int caract_id = (int) db.insert(TABLE_CARACTERISTICAS, null, values);
         caracteristica.setId(caract_id);
         return caracteristica;
@@ -131,9 +130,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_TIPOLOGIA, imovel.tipologia);
         values.put(KEY_LOCALIZACAO, imovel.localizacao);
         values.put(KEY_URL, imovel.url);
-        Caracteristica caractristica = this.criarCaracteristica(imovel.caracteristicas);
-        values.put(KEY_CARACT_ID, caractristica.getId());
-        imovel.caracteristicas = caractristica;
+        if(imovel.caracteristicas != null) {
+            Caracteristica caractristica = this.criarCaracteristica(imovel.caracteristicas);
+            values.put(KEY_CARACT_ID, caractristica.getId());
+            imovel.caracteristicas = caractristica;
+        }
 
         int imovel_id = (int) db.insert(TABLE_IMOVEIS, null, values);
         imovel.setId(imovel_id);
@@ -160,6 +161,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         int user_id = (int) db.insert(TABLE_USERS, null, values);
         user.setId(user_id);
         return user;
+    }
+
+    public Boolean checkUser(String username){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM "+TABLE_USERS+" WHERE "+KEY_USER+" = '"+username+"'";
+        Cursor c = db.rawQuery(query, null);
+        if(c != null && c.moveToFirst()) {
+            return true;
+        }
+        return false;
+    }
+    public Boolean checkClient(String nome){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM "+TABLE_CLIENTES+" WHERE "+KEY_NOME+" = '"+nome+"'";
+        Cursor c = db.rawQuery(query, null);
+        if(c != null && c.moveToFirst()) {
+            return true;
+        }
+        return false;
+    }
+    public Boolean checkImovel(String descricao){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM "+TABLE_IMOVEIS+" WHERE "+KEY_DESCRICAO+" = '"+descricao+"'";
+        Cursor c = db.rawQuery(query, null);
+        if(c != null && c.moveToFirst()) {
+            return true;
+        }
+        return false;
     }
 
     public Imovel obterImovel(long imovel_id){
@@ -198,8 +227,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Caracteristica caracteristica = new Caracteristica();
         if(c != null && c.moveToFirst()) {
             caracteristica.setId(c.getInt(c.getColumnIndexOrThrow(KEY_ID)));
-            caracteristica.sauna = c.getInt(c.getColumnIndexOrThrow(KEY_SAUNA));
-            caracteristica.areacomum = c.getInt(c.getColumnIndexOrThrow(KEY_AREACOMUM));
+            caracteristica.sauna = c.getInt(c.getColumnIndexOrThrow(KEY_SAUNA))==1?"sim":"nao";
+            caracteristica.areacomum = c.getInt(c.getColumnIndexOrThrow(KEY_AREACOMUM))==1?"sim":"nao";
         }
         return caracteristica;
     }
@@ -260,8 +289,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public int atualizarCaracteristica(Caracteristica caracteristica){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(KEY_SAUNA, caracteristica.sauna);
-        values.put(KEY_AREACOMUM, caracteristica.areacomum);
+        values.put(KEY_SAUNA, caracteristica.hasSauna()?1:0);
+        values.put(KEY_AREACOMUM, caracteristica.hasAreacomum()?1:0);
         return db.update(TABLE_CARACTERISTICAS, values, KEY_ID+ " = ? ",new String[]{String.valueOf(caracteristica.getId())});
     }
 

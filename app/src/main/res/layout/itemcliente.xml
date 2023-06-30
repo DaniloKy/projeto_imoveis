@@ -40,7 +40,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:layout_below="@id/nomeCliente"/>
+                android:layout_below="@id/nomeCliente" />
 
             </RelativeLayout>
 
@@ -49,15 +49,15 @@
                 android:layout_height="wrap_content"
                 android:text="@string/editBtn"
                 android:id="@+id/editCliente"
-                android:layout_toRightOf="@+id/clientDetails"/>
+                android:layout_below="@+id/clientDetails"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/deleteBtn"
                 android:id="@+id/deleteCliente"
-                android:layout_below="@+id/editCliente"
-                android:layout_toRightOf="@+id/clientDetails"/>
+                android:layout_below="@+id/clientDetails"
+                android:layout_toRightOf="@+id/editCliente"/>
 
         </RelativeLayout>
 

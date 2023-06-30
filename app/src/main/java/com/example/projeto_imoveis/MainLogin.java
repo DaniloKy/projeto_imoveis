@@ -12,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projeto_imoveis.bd.DatabaseHelper;
 import com.example.projeto_imoveis.classes.User;
+import com.example.projeto_imoveis.service.MainDataService;
+import com.example.projeto_imoveis.service.ServiceVolley;
 
 
 public class MainLogin extends AppCompatActivity implements View.OnClickListener {
@@ -42,7 +44,7 @@ public class MainLogin extends AppCompatActivity implements View.OnClickListener
             db.fecharDB();
             if(attempt){
                 Toast.makeText(this, "Login Success", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this, Main.class);
+                Intent intent = new Intent(this, MainDataService.class);
                 startActivity(intent);
             }else{
                 Toast.makeText(this, "Failed to login", Toast.LENGTH_SHORT).show();

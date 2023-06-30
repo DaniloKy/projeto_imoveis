@@ -63,15 +63,15 @@
                 android:layout_height="wrap_content"
                 android:text="@string/editBtn"
                 android:id="@+id/editImovel"
-                android:layout_toRightOf="@+id/imovelDetails"/>
+                android:layout_below="@+id/imovelDetails"/>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/deleteBtn"
                 android:id="@+id/deleteImovel"
-                android:layout_toRightOf="@+id/imovelDetails"
-                android:layout_below="@id/editImovel"/>
+                android:layout_toRightOf="@+id/editImovel"
+                android:layout_below="@id/imovelDetails"/>
 
         </RelativeLayout>
 
